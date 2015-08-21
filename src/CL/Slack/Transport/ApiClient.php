@@ -148,7 +148,13 @@ class ApiClient implements ApiClientInterface
 
             $this->eventDispatcher->dispatch(self::EVENT_REQUEST, new RequestEvent($data));
 
-            $response = $this->client->post(self::API_BASE_URL . $method, ['form_params' => $data]);
+            $request = $this->client->createRequest('POST', self::API_BASE_URL . $method);
+
+            $body = new PostBody();
+            $body->replaceFields($data);
+            $request->setBody($body);
+
+            $response = $this->client->send($request);
         } catch (\Exception $e) {
             throw new SlackException('Failed to send data to the Slack API', null, $e);
         }
