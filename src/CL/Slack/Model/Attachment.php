@@ -257,4 +257,20 @@ class Attachment extends AbstractModel
     {
         return $this->fields;
     }
+
+    /**
+     * @param array valid values for mrkdwn_in are: ["pretext", "text", "fields"]. Setting "fields" will enable markup formatting for the value of each field
+     */
+    public function setMrkdwnIn(Array $mrkdwnIn)
+    {
+        $this->mrkdwnIn = $mrkdwnIn;
+    }
+
+    /**
+     * @return array valid values for mrkdwn_in are: ["pretext", "text", "fields"]. Setting "fields" will enable markup formatting for the value of each field
+     */
+    public function getMrkdwnIn()
+    {
+        return $this->mrkdwnIn;
+    }
 }
